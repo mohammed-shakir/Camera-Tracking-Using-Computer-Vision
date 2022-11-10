@@ -1,5 +1,7 @@
 # UWB-Navigation
 
+*Project info*
+
 ## Git Commands
 
 To create a branch:
