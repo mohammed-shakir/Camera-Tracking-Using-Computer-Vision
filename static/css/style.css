@@ -1,0 +1,166 @@
+@import url(https://fonts.googleapis.com/css?family=Lato:300);
+
+/* css code for placing things into their assigned possitons and their apperance on the screen */
+
+body {
+  margin: 0px;
+  padding: 0px;
+  overflow:hidden;
+}
+/* places video feed in middle of the screen */
+
+.video-container {
+  width: 100vw;
+	height: 100vh;
+}
+/* the appereance of elements*/
+
+.videoElement {
+  width: 100%;
+  height: 100%;
+  background-color: green;
+}
+/* places buttons at the bottom part of screen */
+.footer{
+  display:flex;
+  flex-direction:row;
+  justify-content: center;
+  position: absolute;
+  margin-right: auto;
+  margin-left: auto;
+  width: 100%;
+  bottom: 1%;
+}
+/* keeps buttons alligned at the bottom of screen */
+.bottomRow{
+  display:inline-block;
+  padding:0.3em 1.2em;
+  margin: 0 3px;
+  border-radius:5px;
+  border: none;
+  text-decoration:none;
+  font-family:'Roboto',sans-serif;
+  font-size: larger;
+  font-weight:300;
+  color:#000000;
+  background-color:#4eb5f1;
+  text-align:center;
+}
+/* changes the colour when having mouse over the buttom */
+.bottomRow:hover{
+  background-color:#4095c6;
+}
+/*Create a dropdown box that appears when the user moves the mouse over an element*/
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+.dropdown-content {
+  display: none;
+  flex-direction:column;
+  position: absolute;
+  background-color: #f1f1f1;
+  border-radius:5px;
+  min-width: 100px;
+  left: 3px;
+  bottom: 28px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+  border-radius:5px;
+}
+
+.dropdown:hover .dropdown-content {
+  display: flex;
+}
+
+/*the text of the specific keys.*/
+
+.keys {
+  font-family: 'Lato', sans-serif;
+  text-align: center;
+  width: 200px;
+  height: 100px;
+  margin: auto;
+}
+
+/*handles arrow buttons positions and appereances.*/
+.arrfooter{
+  position: absolute;
+  bottom: 2%;
+  right: 2%;
+}
+
+.arr {
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  line-height: 50px;
+  background: grey;
+  color: white;
+  font-size: 25px;
+  border-right: 5px solid darken(grey, 20);
+  border-bottom: 5px solid darken(grey, 20);
+  border-left: 5px solid darken(grey, 15);
+  border-top: 5px solid darken(grey, 10);
+  border-radius: 5px;
+  display: inline-block;
+  margin: 2.5px;
+}
+
+/* log stuff */
+
+.log{
+  position: absolute;
+  bottom: 1%;
+  left: 1%;
+}
+/* decides what the button for the log should look like */
+.overButton{
+  cursor: pointer;
+  width: 100px;
+  height: 40px;
+  text-align: center;
+  background: grey;
+  color: white;
+  font-size: 15px;
+  border-radius: 5px;
+  display: inline-block;
+}
+
+/* creates and overlay effect */
+#overlay{
+  position: fixed;
+  display: none;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.5);
+  overflow:auto;
+  z-index: 2;
+  cursor: pointer;
+}
+
+#text{
+  position: absolute;
+  margin-top: 10%;
+  width: 70%;
+  left: 50%;
+  font-size: 40px;
+  color: white;
+  transform: translate(-50%,0);
+}

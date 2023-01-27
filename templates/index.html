@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <!-- TODO: Change title -->
+  <title>D0020E - Group 10</title>
+  <script async src='/cdn-cgi/bm/cv/669835187/api.js'></script>
+</head>
+
+<body>
+  <script type=text/javascript>
+  //A ajax post request done to send rotation cordinates as json data.
+      $(function() {
+        $('a#rotate').on('click', function(e) {
+          e.preventDefault()
+          var i = document.getElementById("yaw").value;
+          var j = document.getElementById("pitch").value;
+          req = $.ajax({
+            url:'/rotate',
+            type: 'POST',
+            contentType: 'application/json',
+            dataType: 'json',
+            data: JSON.stringify({i:i, j:j})
+          });
+          req.done(function(){
+          });
+        });
+      });
+    </script>
+  <div class="video-container">
+
+    <!-- THIS ONLY WORKS IN FIREFOX -->
+    <!-- A img tag with the video source that is adapted to screen size with a script-->
+    <img src="{{ src }}"
+      alt="{{ src }}" width="1920"
+      height="1080" id="feed">
+
+      <script>
+        var img = document.getElementById("feed")
+        var win = window,
+        doc = document,
+        docElem = doc.documentElement,
+        body = doc.getElementsByTagName('body')[0],
+        x = win.innerWidth || docElem.clientWidth || body.clientWidth,
+        y = win.innerHeight|| docElem.clientHeight|| body.clientHeight;
+
+        img.height = y
+        img.width = x
+        
+      </script>
+
+    <!-- HUD -->
+
+    <div class="footer">
+
+      <div class="dropdown">
+        <button class="button bottomRow">Rotate camera</button>
+        <div class="dropdown-content">
+          <form>
+            <a>Yaw: <input type="number" style="background-color: rgb(155, 170, 169);" class="bottomRow" name="yaw"
+                id="yaw" min="0" max="360"></a>
+            <a>Pitch: <input type="number" style="background-color: rgb(155, 170, 169);" class="bottomRow" name="pitch"
+                id="pitch" min="90" max="180"></a>
+            <a href=# id=rotate><button class='button bottomRow'>Rotate</button></a>
+          </form>
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <button class="button bottomRow">Follow person</button>
+        <div class="dropdown-content">
+          {% for tracker in widefindTrackers.keys() %}
+          <a onclick="follow('{{ tracker }}')">{{ tracker }}</a>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <button class="button bottomRow">Look at person</button>
+        <div class="dropdown-content">
+          {% for tracker in widefindTrackers.keys() %}
+          <a onclick="lookAt('{{ tracker }}')">{{ tracker }}</a>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <button class="button bottomRow">Change camera</button>
+        <div class="dropdown-content">
+          <a onclick="switchCam('Kitchen')">Kitchen</a>
+          <a onclick="switchCam('Bedroom')">Bedroom</a>
+        </div>
+      </div>
+
+      <div class="log" style="padding:20px">
+        <button class="overButton" onclick="on()">Open log</button>
+      </div>
+    
+      <div id="overlay" onclick="off()">
+          <div id="text">
+              {% for row in log_rows %}
+              <p>{{ row[1] }}</p>
+              {% endfor %}
+          </div>
+          <script>
+            //Script to update log every second
+            list = document.getElementById("text")
+            setInterval(() => {
+                fetch("{{ url_for('views.updateLog') }}").then((response) => {
+                        response.json().then((t) => {
+                          list.innerHTML = ""
+                          for(let i = 0; i < t.length; i++){
+                            let p = document.createElement('p')
+                            p.textContent = t[i]
+                            list.append(p)
+                          }
+                        });
+                });
+            }, 1000);
+          </script>
+      </div>
+
+    </div>
+
+    <div class="arrfooter">
+      <div class="keys">
+        <div class="zoomIn arr" onclick="zoomIn()"><em class="fa fa-search-plus"></em></div>
+        <div class="up arr" onclick="up()"><em class="fa fa-arrow-up"></em></div>
+        <div class="zoomOut arr" onclick="zoomOut()"><em class="fa fa-search-minus"></em></div>
+        <br />
+        <div class="left arr" onclick="left()"><em class="fa fa-arrow-left"></em></div>
+        <div class="down arr" onclick="down()"><em class="fa fa-arrow-down"></em></div>
+        <div class="right arr" onclick="right()"><em class="fa fa-arrow-right"></em></div>
+      </div>
+    </div>
+  </div>
+
+  
+</body>
+
+<script
+  type="text/javascript">(function () { window['__CF$cv$params'] = { r: '6def2fec4d251691', m: 'gqZwj672um515pQmRHaYs4XfkVW1J5jOY8J0rs1ODU4-1645102706-0-ARBsSprk1uRQp/ejKkoKtEFUu9q9Yw6ieetRS1dmVn11lYjqNCsGalNH6zU86/3xKF/xYtfvZIf7AcJCFmC/sWBhgCzhVhCaeABea8iOs9k5oCtT6SNoI/9XN/cTdSPHnXXE2S75msnSdYlA0fl0NKwCojFidUsBYnPtkrJJ13qQxADhP7y0TxfjKKXuiBfheg==', s: [0x56dd5cc53f, 0xdcaf6c87fa], } })();</script>
+
+<script>
+
+  //Scripts to handle all interaction with interface
+  
+
+  // Make console visible
+  function on(){
+    document.getElementById("overlay").style.display = "block";
+  }
+  
+  // Make console invisible
+  function off(){
+    document.getElementById("overlay").style.display = "none";
+  }
+  //looks at person with widefind when called
+  function lookAt(target) {
+    var s = "/look/" + target
+    fetch(s)
+  }
+  //follows person with widefind when called
+  function follow(target) {
+    var s = "/follow/" + target
+    fetch(s)
+  }
+
+  // Switches between the 2 cameras when called.
+  function switchCam(cam) {
+    var s = "/switchCam/" + cam
+    fetch(s)
+    var img = document.getElementById("feed")
+    if(cam == "Bedroom"){
+      img.src = "http://130.240.105.145/cgi-bin/mjpeg?resolution=1920x1080&amp;framerate=5&amp;quality=1"
+      img.alt = "http://130.240.105.145/cgi-bin/mjpeg?resolution=1920x1080&amp;framerate=5&amp;quality=1"
+    }
+    else{
+      img.src = "http://130.240.105.144/cgi-bin/mjpeg?resolution=1920x1080&amp;framerate=5&amp;quality=1"
+      img.alt = "http://130.240.105.144/cgi-bin/mjpeg?resolution=1920x1080&amp;framerate=5&amp;quality=1"
+    }
+  }
+
+  // Manual camera control functions
+  function up() {
+    var s = "/up"
+    fetch(s)
+  }
+
+  function down() {
+    var s = "/down"
+    fetch(s)
+  }
+
+  function left() {
+    var s = "/left"
+    fetch(s)
+  }
+
+  function right() {
+    var s = "/right"
+    fetch(s)
+  }
+
+  function zoomIn() {
+    var s = "/zoomIn"
+    fetch(s)
+  }
+
+  function zoomOut() {
+    var s = "/zoomOut"
+    fetch(s)
+  }
+
+  // Keydown events
+  document.addEventListener("keydown" , function(e){
+    if(e.keyCode == 37 || e.keyCode == 65 ) {
+      left();
+    }
+    else if(e.keyCode == 38 || e.keyCode == 87 ) {
+      up();
+    }
+    else if (e.keyCode == 39 || e.keyCode == 68 ) {
+      right();
+    }
+    else if (e.keyCode == 40 || e.keyCode == 83 )  {
+      down();
+    }
+  });
+
+</script>
+</html>
