@@ -11,6 +11,7 @@ class Controller(Observer):
         
         self.getAllLogs()
 
+        # Change framerate for better performance
         self.src = "http://130.240.105.144/cgi-bin/mjpeg?resolution=1920x1080&amp;framerate=5&amp;quality=1"
 
         self.camera_bedroom_pos = numpy.array([619, 3935, 2600])
@@ -103,7 +104,7 @@ class Controller(Observer):
 
     def databaseConn(self):
         #localhost xampp phpmyadmin database
-        self.connection = pymysql.connect(host="localhost", user="root", password="", database="db")
+        self.connection = pymysql.connect(host="localhost", user="root", password="", database="projekth2ai")
         self.cursor = self.connection.cursor()
 
         #logtable( log_id(int), entry(text), created_at(timestamp))
