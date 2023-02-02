@@ -33,7 +33,7 @@
     <img src="images/logo.jpg" alt="Logo" width="80" height="80">
   </a>
 
-<h3 align="center">Camera control using UWB-navigation with WideFind sensors</h3>
+<h3 align="center">Camera control using computer vision with OpenCV</h3>
 
   <p align="center">
      A project focused on camera control
@@ -84,7 +84,9 @@
 
 <img src="images/screenshot.png" alt="screenshot" width="640" height="280">
 
-This is a project aimed at assisting healthcare workers looking to observe their patients. The project achieves this by using a Aw-he40 HD integrated camera for visuals and a set of WideFind sensors to obtain the position in the room. That position is then converted with some linear algebra to a rotation that the camera can understand.
+This is a project aimed at assisting healthcare workers looking to observe their patients. The project achieves this by using a Aw-he40 HD integrated camera for visuals and an AI with computer vision to obtain the position in the room. That position is then converted with some linear algebra to a rotation that the camera can understand.
+
+This project is heavily based on the project "Camera control using UWB-navigation with WideFind sensors".
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -107,19 +109,26 @@ Perform the following to install and run the program in your code editor of choi
 
 ### Prerequisites
 
-Need the following software in order to run this application
+The following software is required in order to run this application:
 
 * Xampp Control Panel
-  Download and run, turn on apachee and mysql. Open up [http://localhost/phpmyadmin](http://localhost/phpmyadmin) and import database_setup.myqsl.
+  Download and run, turn on apachee and mysql. Open up [http://localhost/phpmyadmin](http://localhost/phpmyadmin) create a database named 'log' and a table 'log_table' then import database_setup.myqsl.
 * A code editor, recommending visual studio code.
-* Firefox browser
+* Firefox or Safari browser
 
+### Required python libraries
+* pymysql
+* paho-mqtt
+* requests
+* flask
+
+These can be installed using the ... file.
 ### Installation
 
 1. Begin by doing the prerequisites
 2. Download the zip file of the project and unpack it in your code editor of choice.
 3. Start the Xampp control panel and boot up apachee and mysql.
-4. Make sure to pip install all necessary imports when code is not compiling correct.
+4. Make sure to create a database in mysql with the name 'log' and table 'log_table'.
 5. Run the app.py file in your editor.
 6. Open up firefox browser and put in http://127.0.0.1:5000/.
 
@@ -175,6 +184,24 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- CONTACT -->
 ## Contact
 
+Mohammed Dinawi - mohdin-0@student.ltu.se
+
+Jenny Enckell - jenenc-0@student.ltu.se
+
+Mohammed Shakir - mohsha-0@student.ltu.se
+
+Ahmad Allahham - ahmall-0@student.ltu.se
+
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+
+
+<!-- ACKNOWLEDGMENTS -->
+## Acknowledgments
+
+This project is based on the code and documentation created by
+
 Alexander Österberg - [@Alexandersterb1](https://twitter.com/Alexandersterb1) - dikesalex@gmail.com
 
 Martin Askolin - marsak-8@student.ltu.se
@@ -185,20 +212,7 @@ Filip Bergström - filber-9@student.ltu.se
 
 Marcus Eriksson - amueri-6@student.ltu.se
 
-
-
 Project Link: [https://github.com/ItzCornflakez/D0020E_Project](https://github.com/ItzCornflakez/D0020E_Project)
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-
-
-<!-- ACKNOWLEDGMENTS -->
-## Acknowledgments
-
-* []()
-* []()
-* []()
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
