@@ -4,6 +4,9 @@ import numpy
 from widefind import WideFind
 import widefind as wf
 import pymysql
+from dotenv import load_dotenv
+from pathlib import Path
+import os
 
 class Controller(Observer):
     def __init__(self):
@@ -103,8 +106,12 @@ class Controller(Observer):
         self.cam.zoom(0)
 
     def databaseConn(self):
+        load_dotenv()
+        env_path = Path('.')/'.env'
+        load_dotenv(dotenv_path=env_path)
+        DB_NAME = os.getenv("DB_NAME")
         #localhost xampp phpmyadmin database
-        self.connection = pymysql.connect(host="localhost", user="root", password="", database="projekth2ai")
+        self.connection = pymysql.connect(host="localhost", user="root", password="", database=DB_NAME)
         self.cursor = self.connection.cursor()
 
         #logtable( log_id(int), entry(text), created_at(timestamp))
