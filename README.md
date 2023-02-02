@@ -135,6 +135,46 @@ These can be installed using the ... file.
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
+<!-- Git -->
+## Git
+
+Make sure you are standing inside a folder (in the console) where you would like the project to exist. 
+After you can run the command: 
+
+```
+git clone https://github.com/RyuTribal/DarkFantasies.git
+
+```
+To create a branch:
+```
+git branch your-branch-name
+```
+To switch branches:
+```
+git checkout your-branch-name
+```
+To save changes made to a file:
+```
+git add .
+```
+
+To finalize your changes (no going back):
+```
+git commit -m "A useful message for the other developers about what changes you made"
+``` 
+
+To push code to a branch:
+```
+git push origin your-branch-name
+```
+
+To pull new changes from a branch:
+```
+git pull origin your-branch-name
+```
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
 
 <!-- USAGE EXAMPLES -->
 ## Usage
