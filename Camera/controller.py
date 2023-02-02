@@ -1,10 +1,13 @@
+import sys
+sys.path.insert(0, 'C:\\Users\\mmoha\\Desktop\\Camera-Tracking-Using-UWB-Navigation\\Camera')
 from camera import HDIntegratedCamera
-from observer_pattern.observer import Observer
 import numpy
 from widefind import WideFind
 import widefind as wf
 import pymysql
 
+
+from observer_pattern.observer import Observer
 class Controller(Observer):
     def __init__(self):
         #Instantiates all relevant tools the controller needs to operate
