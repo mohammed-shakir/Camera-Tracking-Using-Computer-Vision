@@ -1,25 +1,41 @@
-# import the opencv library
 import cv2
-  
-  
-# define a video capture object
-integratedCamera = cv2.VideoCapture(0)
-IP_camera1 = cv2.VideoCapture("http://130.240.105.144/cgi-bin/mjpeg?resolution=1920x1080&amp;framerate=30&amp;quality=1")
-  
-while(True):
-      
-    # Capture the video frame
-    # by frame
-    ret, frame = IP_camera1.read()
-  
-    # Display the resulting frame
-    cv2.imshow('frame', frame)
-      
-    # the 'q' button is set as the quit button
-    if cv2.waitKey(1) & 0xFF == ord('q'):
+import imutils
+
+# Initializing the HOG person
+# detector
+hog = cv2.HOGDescriptor()
+hog.setSVMDetector(cv2.HOGDescriptor_getDefaultPeopleDetector())
+
+cap = cv2.VideoCapture("http://130.240.105.144/cgi-bin/mjpeg?resolution=1920x1080&amp;framerate=30&amp;quality=1")
+
+while cap.isOpened():
+    # Reading the video stream
+    ret, image = cap.read()
+    if ret:
+        image = imutils.resize(image,
+                               width=min(1080, image.shape[1]))
+
+        # Detecting all the regions
+        # in the Image that has a
+        # pedestrians inside it
+        (regions, _) = hog.detectMultiScale(image,
+                                            winStride=(4, 4),
+                                            padding=(4, 4),
+                                            scale=1.05)
+
+        # Drawing the regions in the
+        # Image
+        for (x, y, w, h) in regions:
+            cv2.rectangle(image, (x, y),
+                          (x + w, y + h),
+                          (0, 0, 255), 2)
+
+        # Showing the output Image
+        cv2.imshow("Image", image)
+        if cv2.waitKey(25) & 0xFF == ord('q'):
+            break
+    else:
         break
-  
-# After the loop release the cap object
-vid.release()
-# Destroy all the windows
+
+cap.release()
 cv2.destroyAllWindows()
