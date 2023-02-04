@@ -46,11 +46,11 @@ class WideFind(Subject, ABC):
 
         self.__client.subscribe(subscription)
 
-    def __on_connect(self, client, userdata, flags, rc, properties=None):
+    def __on_connect(self):
         if self.debug:
             print("WideFind: Connected to " + self.broker_url + ":" + str(self.broker_port))
 
-    def __on_message(self, client, userdata, message):
+    def __on_message(self, message):
         # Decode message and put into list
         mqtt_message_json = json.loads(message.payload)
         mqtt_message_list = mqtt_message_json["message"].split(',')

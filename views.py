@@ -1,21 +1,24 @@
 from flask import Blueprint, render_template, request, Response
-from controller import Controller
-import widefind as wf
+from camera_control.controller import Controller
+# import widefind as wf
 import json
+
+# WideFind code is commented out since it is not used in this project
 
 # Instantiate a blueprint of views and a controller
 views = Blueprint('views', __name__)
 controller = Controller()
 
-# Try catch of widefind system to see if it can be connected to or not
-try:
-    widefind = wf.WideFind("130.240.74.55", 1883)
-    widefind.run("ltu-system/#", False)
-    widefind.attach(controller)
-except RuntimeError:
-    raise RuntimeError('Could not connect to WideFind')
-else:
-    print("WideFind connected")
+# # Try catch of widefind system to see if it can be connected to or not
+# try:
+#     widefind = wf.WideFind("130.240.74.55", 1883)
+#     widefind.run("ltu-system/#", False)
+#     widefind.attach(controller)
+# except RuntimeError:
+#     raise RuntimeError('Could not connect to WideFind')
+# else:
+#     print("WideFind connected")
+
 
 # Default route with a few variables passed to the html file
 @views.route('/')
