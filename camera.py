@@ -10,6 +10,7 @@ class HDIntegratedCamera:
         baseurl (str): URL for communication with camera.
 
     """
+
     class Conversion:
         """Contains values for translating degrees to camera's hex values."""
         DEG_TO_HEX_YAW = 42480 / 350
@@ -56,11 +57,10 @@ class HDIntegratedCamera:
 
         degrees *= conv
         degrees = int(degrees)
-        degrees += (int("0x2d08", 16)-5)
+        degrees += (int("0x2d08", 16) - 5)
         degrees = hex(degrees)
         return str(degrees)[2:].upper()
 
-    
     @staticmethod
     def convert_zoom(new_zoom: int):
         clamped_input = max(0, min(100, new_zoom))
@@ -69,8 +69,8 @@ class HDIntegratedCamera:
 
     def rotate(self, new_yaw: int, new_pitch: int):
         """Rotate camera relative to zero pointer"""
-        url = self.__BASEURL + self.Commands.ROTATE                             # Rotate command
-        url += self.convert_degrees(new_yaw, self.Conversion.DEG_TO_HEX_YAW)      # Yaw argument
+        url = self.__BASEURL + self.Commands.ROTATE  # Rotate command
+        url += self.convert_degrees(new_yaw, self.Conversion.DEG_TO_HEX_YAW)  # Yaw argument
         url += self.convert_degrees(new_pitch, self.Conversion.DEG_TO_HEX_PITCH)  # Pitch argument
         url += "&res=1"
 
