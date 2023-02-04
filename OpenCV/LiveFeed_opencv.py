@@ -30,6 +30,13 @@ while cap.isOpened():
                           (x + w, y + h),
                           (0, 0, 255), 2)
 
+            # Print coordinates of detected person
+            print("x: " + str(x) + " y: " + str(y) + " width: " + str(w) + " height: " + str(h))
+            # find center of person
+            center_x = x + w / 2
+            center_y = y + h / 2
+            print("center_x: " + str(center_x) + " center_y: " + str(center_y))
+
         # Showing the output Image
         cv2.imshow("Image", image)
         if cv2.waitKey(25) & 0xFF == ord('q'):
