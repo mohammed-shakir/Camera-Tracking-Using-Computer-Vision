@@ -1,4 +1,5 @@
 # <div id="top"></div>
+
 <!--
 *** Thanks for checking out the Best-README-Template. If you have a suggestion
 *** that would make this better, please fork the repo and create a pull request
@@ -80,17 +81,18 @@
 
 
 <!-- ABOUT THE PROJECT -->
+
 ## About The Project
 
 <img src="images/screenshot.png" alt="screenshot" width="640" height="280">
 
-This is a project aimed at assisting healthcare workers looking to observe their patients. The project achieves this by using a Aw-he40 HD integrated camera for visuals and an AI with computer vision to obtain the position in the room. That position is then converted with some linear algebra to a rotation that the camera can understand.
+This is a project aimed at assisting healthcare workers looking to observe their patients. The project achieves this by
+using a Aw-he40 HD integrated camera for visuals and an AI with computer vision to obtain the position in the room. That
+position is then converted with some linear algebra to a rotation that the camera can understand.
 
 This project is heavily based on the project "Camera control using UWB-navigation with WideFind sensors".
 
 <p align="right">(<a href="#top">back to top</a>)</p>
-
-
 
 ### Built With
 
@@ -103,6 +105,7 @@ This project is heavily based on the project "Camera control using UWB-navigatio
 
 
 <!-- GETTING STARTED -->
+
 ## Getting Started
 
 Perform the following to install and run the program in your code editor of choice.
@@ -112,17 +115,20 @@ Perform the following to install and run the program in your code editor of choi
 The following software is required in order to run this application:
 
 * Xampp Control Panel
-  Download and run, turn on apachee and mysql. Open up [http://localhost/phpmyadmin](http://localhost/phpmyadmin) create a database named 'log' and a table 'log_table' then import database_setup.myqsl.
+  Download and run, turn on apachee and mysql. Open up [http://localhost/phpmyadmin](http://localhost/phpmyadmin) create
+  a database named 'log' and a table 'log_table' then import database_setup.myqsl.
 * A code editor, recommending visual studio code.
 * Firefox or Safari browser
 
 ### Required python libraries
+
 * pymysql
 * paho-mqtt
 * requests
 * flask
 
 These can be installed using the ... file.
+
 ### Installation
 
 1. Begin by doing the prerequisites
@@ -137,6 +143,7 @@ These can be installed using the ... file.
 
 
 <!-- USAGE EXAMPLES -->
+
 ## Usage
 
 --
@@ -146,20 +153,25 @@ These can be installed using the ... file.
 
 
 <!-- ROADMAP -->
+
 ## Roadmap
 
-See the [open issues](https://github.com/ItzCornflakez/D0020E_Project/issues) for a full list of proposed features (and known issues).
+See the [open issues](https://github.com/ItzCornflakez/D0020E_Project/issues) for a full list of proposed features (and
+known issues).
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
 
 <!-- CONTRIBUTING -->
+
 ## Contributing
 
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any
+contributions you make are **greatly appreciated**.
 
-If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
+If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also
+simply open an issue with the tag "enhancement".
 Don't forget to give the project a star! Thanks again!
 
 1. Fork the Project
@@ -173,6 +185,7 @@ Don't forget to give the project a star! Thanks again!
 
 
 <!-- LICENSE -->
+
 ## License
 
 Distributed under the MIT License. See `LICENSE.txt` for more information.
@@ -182,6 +195,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 
 <!-- CONTACT -->
+
 ## Contact
 
 Mohammed Dinawi - mohdin-0@student.ltu.se
@@ -198,6 +212,7 @@ Ahmad Allahham - ahmall-0@student.ltu.se
 
 
 <!-- ACKNOWLEDGMENTS -->
+
 ## Acknowledgments
 
 This project is based on the code and documentation created by
@@ -220,16 +235,29 @@ Project Link: [https://github.com/ItzCornflakez/D0020E_Project](https://github.c
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+
 [contributors-shield]: https://img.shields.io/github/contributors/ItzCornflakez/D0020E_Project.svg?style=for-the-badge
+
 [contributors-url]: https://github.com/ItzCornflakez/D0020E_Project/graphs/contributors
+
 [forks-shield]: https://img.shields.io/github/forks/ItzCornflakez/D0020E_Project.svg?style=for-the-badge
+
 [forks-url]: https://github.com/ItzCornflakez/D0020E_Project/network/members
+
 [stars-shield]: https://img.shields.io/github/stars/ItzCornflakez/D0020E_Project.svg?style=for-the-badge
+
 [stars-url]: https://github.com/ItzCornflakez/D0020E_Project/stargazers
+
 [issues-shield]: https://img.shields.io/github/issues/ItzCornflakez/D0020E_Project.svg?style=for-the-badge
+
 [issues-url]: https://github.com/ItzCornflakez/D0020E_Project/issues
+
 [license-shield]: https://img.shields.io/github/license/ItzCornflakez/D0020E_Project.svg?style=for-the-badge
+
 [license-url]: https://github.com/ItzCornflakez/D0020E_Project/blob/master/LICENSE.txt
+
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
+
 [linkedin-url]: https://linkedin.com/in/linkedin_username
+
 [product-screenshot]: images/screenshot.png
