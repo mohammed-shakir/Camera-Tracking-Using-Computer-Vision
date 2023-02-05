@@ -48,41 +48,41 @@ def rotate():
     return Response(str(response))
 
 
-# Look at function that takes the value passed to the function through fetch and passes it to the controller, so it
-# can rotate the camera in the direction of the tracker
-@views.route('/look/<tracker>')
-def look(tracker):
-    """
-    Rotate the camera to look at the specified tracker
-    :param tracker: the id of the tracker
-    :return: an HTTP 204 status code indicating a successful operation
-    """
-    name = ""
-    for key, value in controller.WideFindNameDict.items():
-        if key == tracker:
-            name = tracker
-            tracker = value
-    controller.is_follow = False
-    controller.lookAtWideFind(tracker)
-    action = "Now looking at " + name + ""
-    controller.databaseActions(action)
-    return '', 204
+# # Look at function that takes the value passed to the function through fetch and passes it to the controller, so it
+# # can rotate the camera in the direction of the tracker
+# @views.route('/look/<tracker>')
+# def look(tracker):
+#     """
+#     Rotate the camera to look at the specified tracker
+#     :param tracker: the id of the tracker
+#     :return: an HTTP 204 status code indicating a successful operation
+#     """
+#     name = ""
+#     for key, value in controller.WideFindNameDict.items():
+#         if key == tracker:
+#             name = tracker
+#             tracker = value
+#     controller.is_follow = False
+#     controller.lookAtWideFind(tracker)
+#     action = "Now looking at " + name + ""
+#     controller.databaseActions(action)
+#     return '', 204
 
 
-# Follow function that takes the value passed to the function through fetch and passes it to the controller, so it can
-# rotate the camera in the direction of the tracker
-@views.route('/follow/<tracker>')
-def follow(tracker):
-    name = ""
-    for key, value in controller.WideFindNameDict.items():
-        if key == tracker:
-            name = tracker
-            tracker = value
-    controller.is_follow = True
-    controller.followWideFind(tracker)
-    action = "Now following " + name + ""
-    controller.databaseActions(action)
-    return '', 204
+# # Follow function that takes the value passed to the function through fetch and passes it to the controller, so it can
+# # rotate the camera in the direction of the tracker
+# @views.route('/follow/<tracker>')
+# def follow(tracker):
+#     name = ""
+#     for key, value in controller.WideFindNameDict.items():
+#         if key == tracker:
+#             name = tracker
+#             tracker = value
+#     controller.is_follow = True
+#     controller.followWideFind(tracker)
+#     action = "Now following " + name + ""
+#     controller.databaseActions(action)
+#     return '', 204
 
 
 # Switch function that takes the value passed to the function through fetch and passes it to the controller, so it can
@@ -135,21 +135,21 @@ def zoomOut():
     controller.zoomOut()
     return '', 204
 
+#
+# # Placeholder function for getting widefind sensors and updating that list on interface(can be done in the same way
+# # as updatelog below)
+# @views.route("/getWidefind")
+# def getWidefind():
+#     response = controller.trackersDict
+#     return Response(str(response))
+#
 
-# Placeholder function for getting widefind sensors and updating that list on interface(can be done in the same way
-# as updatelog below)
-@views.route("/getWidefind")
-def getWidefind():
-    response = controller.trackersDict
-    return Response(str(response))
-
-
-@views.route("/getWide findCoordinates")
-@views.route("/getWidefindCoordinates/<wfID>")
-def getWidefindCoordinates(wfID):
-    response = controller.trackersDict.get(wfID)
-    print(response)
-    return Response(str(response))
+# @views.route("/getWide findCoordinates")
+# @views.route("/getWidefindCoordinates/<wfID>")
+# def getWidefindCoordinates(wfID):
+#     response = controller.trackersDict.get(wfID)
+#     print(response)
+#     return Response(str(response))
 
 
 @views.route("/updateLog")

@@ -204,7 +204,7 @@
     }
   }
 
-  // Manual camera control functions
+// Manual camera control functions
   function up() {
     var s = "/up"
     fetch(s)
@@ -224,6 +224,24 @@
     var s = "/right"
     fetch(s)
   }
+
+<!--  document.onkeydown = function(event) {-->
+<!--  switch (event.keyCode) {-->
+<!--    case 38:-->
+<!--      up();-->
+<!--      break;-->
+<!--    case 40:-->
+<!--      down();-->
+<!--      break;-->
+<!--    case 37:-->
+<!--      left();-->
+<!--      break;-->
+<!--    case 39:-->
+<!--      right();-->
+<!--      break;-->
+<!--  }-->
+<!--};-->
+
 
   function zoomIn() {
     var s = "/zoomIn"

@@ -41,39 +41,42 @@ class Controller(Observer):
         self.followTarget = ""
         self.is_follow = False
 
-    def createWideFindNameDict(self):
-        # A function for creating a dictionary to link sensor id to a name
-        oldNamesDict = {"Kitchen counter": "543D85B1B2D91E29",
-                        "Kitchen corner 1": "9691FE799F371A4C",
-                        "Kitchen corner 2": "D4984282E2E4D10B",
-                        "Bedroom computer": "4B2A8EE2B9BAAAC0",
-                        "Door": "03FF5C0A2BFA3A9B",
-                        "person1": "F1587D88122BE247",
-                        "Bed": "6881445FDC01E3F2"
-                        }
-        self.WideFindNameDict = {}
-        for key, value in self.trackersDict.items():
-            for name, old_value in oldNamesDict.items():
-                if key == old_value and key not in self.WideFindNameDict.values():
-                    self.WideFindNameDict[name] = key
+    #  need to be deleted
+
+    # def createWideFindNameDict(self):
+    #     # A function for creating a dictionary to link sensor id to a name
+    #     oldNamesDict = {"Kitchen counter": "543D85B1B2D91E29",
+    #                     "Kitchen corner 1": "9691FE799F371A4C",
+    #                     "Kitchen corner 2": "D4984282E2E4D10B",
+    #                     "Bedroom computer": "4B2A8EE2B9BAAAC0",
+    #                     "Door": "03FF5C0A2BFA3A9B",
+    #                     "person1": "F1587D88122BE247",
+    #                     "Bed": "6881445FDC01E3F2"
+    #                     }
+    #     self.WideFindNameDict = {}
+    #     for key, value in self.trackersDict.items():
+    #         for name, old_value in oldNamesDict.items():
+    #             if key == old_value and key not in self.WideFindNameDict.values():
+    #                 self.WideFindNameDict[name] = key
 
     def rotate(self, i, j):
         # A function handling a rotate command
         self.cam.rotate(i, j)
 
-    def lookAtWideFind(self, val):
-        # A function handling a look at sensor command by calling rotate command with specific coordinates
-        if val in self.trackers:
-            tracker_pos = self.trackersDict[val]
-            new_yaw = self.cam_trans.get_yaw_from_zero(tracker_pos)
-            new_pitch = self.cam_trans.get_pitch_from_zero(tracker_pos)
-            if new_pitch > 70:
-                new_pitch = 70
-            self.cam.rotate(new_yaw, new_pitch + 80)
-
-    def followWideFind(self, val):
-        # A function turning on follow so camera follows a specific sensor
-        self.followTarget = val
+    #  need to be deleted
+    # def lookAtWideFind(self, val):
+    #     # A function handling a look at sensor command by calling rotate command with specific coordinates
+    #     if val in self.trackers:
+    #         tracker_pos = self.trackersDict[val]
+    #         new_yaw = self.cam_trans.get_yaw_from_zero(tracker_pos)
+    #         new_pitch = self.cam_trans.get_pitch_from_zero(tracker_pos)
+    #         if new_pitch > 70:
+    #             new_pitch = 70
+    #         self.cam.rotate(new_yaw, new_pitch + 80)
+    #
+    # def followWideFind(self, val):
+    #     # A function turning on follow so camera follows a specific sensor
+    #     self.followTarget = val
 
     def switchCam(self, cam):
         # A function that switches camera by changing url to camera
@@ -140,6 +143,7 @@ class Controller(Observer):
         self.getAllLogs()
         return self.log_rows
 
+    #  need to be deleted
     # def update(self, subject: WideFind):
     #     # Gets notifications from wide find and updates all the relevant data handling following a sensor
     #     self.trackersDict = subject.trackers
