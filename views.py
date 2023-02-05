@@ -3,6 +3,7 @@ from camera_control.controller import Controller
 # import widefind as wf
 import json
 
+
 # WideFind code is commented out since it is not used in this project
 
 # Instantiate a blueprint of views and a controller
