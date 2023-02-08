@@ -3,11 +3,11 @@
 
 <head>
   <meta charset="utf-8">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
   <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <!-- TODO: Change title -->
-  <title>D0020E - Group 10</title>
+  <title>D0020E - Group 13</title>
   <script async src='/cdn-cgi/bm/cv/669835187/api.js'></script>
 </head>
 
@@ -33,31 +33,31 @@
     </script>
   <div class="video-container">
 
-<!--    &lt;!&ndash; THIS ONLY WORKS IN FIREFOX &ndash;&gt;-->
-<!--    &lt;!&ndash; A img tag with the video source that is adapted to screen size with a script&ndash;&gt;-->
-<!--    <img src="{{ src }}"-->
-<!--      alt="{{ src }}" width="1920"-->
-<!--      height="1080" id="feed">-->
+    <!-- THIS ONLY WORKS IN FIREFOX -->
+    <!-- A img tag with the video source that is adapted to screen size with a script-->
+    <img src="{{ src }}"
+      alt="{{ src }}" width="1920"
+      height="1080" id="feed">
 
-<!--      <script>-->
-<!--        var img = document.getElementById("feed")-->
-<!--        var win = window,-->
-<!--        doc = document,-->
-<!--        docElem = doc.documentElement,-->
-<!--        body = doc.getElementsByTagName('body')[0],-->
-<!--        x = win.innerWidth || docElem.clientWidth || body.clientWidth,-->
-<!--        y = win.innerHeight|| docElem.clientHeight|| body.clientHeight;-->
+      <script>
+        var img = document.getElementById("feed")
+        var win = window,
+        doc = document,
+        docElem = doc.documentElement,
+        body = doc.getElementsByTagName('body')[0],
+        x = win.innerWidth || docElem.clientWidth || body.clientWidth,
+        y = win.innerHeight|| docElem.clientHeight|| body.clientHeight;
 
-<!--        img.height = y-->
-<!--        img.width = x-->
-<!--        -->
-<!--      </script>-->
+        img.height = y
+        img.width = x
 
-    <!-- A video tag with the video source that is adapted to screen size with a script-->
-<video id="feed" width="1920" height="1080" autoplay muted>
-  <source src="{{ src }}" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+      </script>
+
+<!--    &lt;!&ndash; A video tag with the video source that is adapted to screen size with a script&ndash;&gt;-->
+<!--<video id="feed" width="1920" height="1080" autoplay muted>-->
+<!--  <source src="{{ src }}" type="video/mp4">-->
+<!--  Your browser does not support the video tag.-->
+<!--</video>-->
 
 <script>
   var video = document.getElementById("feed");
@@ -89,23 +89,7 @@
         </div>
       </div>
 
-      <div class="dropdown">
-        <button class="button bottomRow">Follow person</button>
-        <div class="dropdown-content">
-          {% for tracker in widefindTrackers.keys() %}
-          <a onclick="follow('{{ tracker }}')">{{ tracker }}</a>
-          {% endfor %}
-        </div>
-      </div>
 
-      <div class="dropdown">
-        <button class="button bottomRow">Look at person</button>
-        <div class="dropdown-content">
-          {% for tracker in widefindTrackers.keys() %}
-          <a onclick="lookAt('{{ tracker }}')">{{ tracker }}</a>
-          {% endfor %}
-        </div>
-      </div>
 
       <div class="dropdown">
         <button class="button bottomRow">Change camera</button>

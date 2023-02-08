@@ -1,14 +1,23 @@
-from flask import Blueprint, render_template, request, Response
+from flask import Blueprint, render_template, request, Response, Flask
 from camera_control.controller import Controller
 # import widefind as wf
 import json
 
-
+app = Flask(__name__, template_folder='templates')
 # WideFind code is commented out since it is not used in this project
 
 # Instantiate a blueprint of views and a controller
 views = Blueprint('views', __name__)
 controller = Controller()
+
+@views.route('/')
+def home():
+    """
+    Render the home page of the application
+    :return: rendered HTML template
+    """
+    return render_template('/index.html')
+
 
 # # Try catch of widefind system to see if it can be connected to or not
 # try:
@@ -22,15 +31,6 @@ controller = Controller()
 
 
 # Default route with a few variables passed to the html file
-@views.route('/')
-def home():
-    """
-    Render the home page of the application
-    :return: rendered HTML template
-    """
-    return render_template('/index.html', src=controller.src, log_rows=controller.log_rows,
-                           widefindTrackers=controller.WideFindNameDict)
-
 
 # Rotate function that takes 2 variables as input through json and rotates the camera using the controller
 @views.route('/rotate', methods=['POST'])
