@@ -7,7 +7,7 @@
   <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <!-- TODO: Change title -->
-  <title>D0020E - Group 10</title>
+  <title>D0020E - Group 13</title>
   <script async src='/cdn-cgi/bm/cv/669835187/api.js'></script>
 </head>
 
@@ -50,8 +50,27 @@
 
         img.height = y
         img.width = x
-        
+
       </script>
+
+<!--    &lt;!&ndash; A video tag with the video source that is adapted to screen size with a script&ndash;&gt;-->
+<!--<video id="feed" width="1920" height="1080" autoplay muted>-->
+<!--  <source src="{{ src }}" type="video/mp4">-->
+<!--  Your browser does not support the video tag.-->
+<!--</video>-->
+
+<script>
+  var video = document.getElementById("feed");
+  var win = window,
+      doc = document,
+      docElem = doc.documentElement,
+      body = doc.getElementsByTagName('body')[0],
+      x = win.innerWidth || docElem.clientWidth || body.clientWidth,
+      y = win.innerHeight || docElem.clientHeight || body.clientHeight;
+
+  video.height = y;
+  video.width = x;
+</script>
 
     <!-- HUD -->
 
@@ -70,23 +89,7 @@
         </div>
       </div>
 
-      <div class="dropdown">
-        <button class="button bottomRow">Follow person</button>
-        <div class="dropdown-content">
-          {% for tracker in widefindTrackers.keys() %}
-          <a onclick="follow('{{ tracker }}')">{{ tracker }}</a>
-          {% endfor %}
-        </div>
-      </div>
 
-      <div class="dropdown">
-        <button class="button bottomRow">Look at person</button>
-        <div class="dropdown-content">
-          {% for tracker in widefindTrackers.keys() %}
-          <a onclick="lookAt('{{ tracker }}')">{{ tracker }}</a>
-          {% endfor %}
-        </div>
-      </div>
 
       <div class="dropdown">
         <button class="button bottomRow">Change camera</button>
@@ -99,7 +102,7 @@
       <div class="log" style="padding:20px">
         <button class="overButton" onclick="on()">Open log</button>
       </div>
-    
+
       <div id="overlay" onclick="off()">
           <div id="text">
               {% for row in log_rows %}
@@ -185,7 +188,7 @@
     }
   }
 
-  // Manual camera control functions
+// Manual camera control functions
   function up() {
     var s = "/up"
     fetch(s)
@@ -205,6 +208,24 @@
     var s = "/right"
     fetch(s)
   }
+
+<!--  document.onkeydown = function(event) {-->
+<!--  switch (event.keyCode) {-->
+<!--    case 38:-->
+<!--      up();-->
+<!--      break;-->
+<!--    case 40:-->
+<!--      down();-->
+<!--      break;-->
+<!--    case 37:-->
+<!--      left();-->
+<!--      break;-->
+<!--    case 39:-->
+<!--      right();-->
+<!--      break;-->
+<!--  }-->
+<!--};-->
+
 
   function zoomIn() {
     var s = "/zoomIn"
