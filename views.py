@@ -1,14 +1,13 @@
 from flask import Blueprint, render_template, request, Response, Flask
-from camera_control.controller import Controller
-# import widefind as wf
+from controller import Controller
 import json
 
 app = Flask(__name__, template_folder='templates')
-# WideFind code is commented out since it is not used in this project
 
 # Instantiate a blueprint of views and a controller
 views = Blueprint('views', __name__)
 controller = Controller()
+
 
 @views.route('/')
 def home():

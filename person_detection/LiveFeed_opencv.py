@@ -6,7 +6,7 @@ import imutils
 hog = cv2.HOGDescriptor()
 hog.setSVMDetector(cv2.HOGDescriptor_getDefaultPeopleDetector())
 
-cap = cv2.VideoCapture("http://130.240.105.144/cgi-bin/mjpeg?resolution=1920x1080&amp;framerate=120&amp;quality=1")
+cap = cv2.VideoCapture("http://130.240.105.145/cgi-bin/mjpeg?resolution=1920x1080&amp;framerate=120&amp;quality=1")
 
 while cap.isOpened():
     # Reading the video stream

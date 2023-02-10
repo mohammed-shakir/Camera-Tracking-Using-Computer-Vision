@@ -1,4 +1,4 @@
-from camera_control.camera import HDIntegratedCamera
+from camera import HDIntegratedCamera
 from observer_pattern.observer import Observer, Subject
 import numpy
 import pymysql
@@ -80,7 +80,7 @@ class Controller(Observer):
 
     def databaseConn(self):
         load_dotenv()
-        env_path = Path('.') / '.env'
+        env_path = Path('camera_control') / '.env'
         load_dotenv(dotenv_path=env_path)
         DB_NAME = os.getenv("DB_NAME")
         # localhost xampp phpmyadmin database
