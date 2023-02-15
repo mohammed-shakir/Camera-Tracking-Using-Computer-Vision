@@ -14,9 +14,12 @@ cap = cv2.VideoCapture("http://130.240.105.144/cgi-bin/mjpeg?resolution=1920x108
 while cap.isOpened():
     # Reading the video stream
     ret, image = cap.read()
+
     if ret:
         image = imutils.resize(image,
                                width=min(400, image.shape[1]))
+        
+        image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
         # Detecting all the regions
         # in the Image that has a
@@ -29,9 +32,11 @@ while cap.isOpened():
         # Drawing the regions in the
         # Image
         for (x, y, w, h) in regions:
+            if(len(regions) > 1):
+                break
             cv2.rectangle(image, (x, y),
-                          (x + w, y + h),
-                          (0, 0, 255), 2)
+                            (x + w, y + h),
+                            (0, 0, 255), 2)            
 
             # Print coordinates of detected person
             #print("x: " + str(x) + " y: " + str(y) + " width: " + str(w) + " height: " + str(h))
