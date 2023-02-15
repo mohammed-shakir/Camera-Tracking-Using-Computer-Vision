@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, request, Response, Flask
 from controller import Controller
 import json
 
+
 app = Flask(__name__, template_folder='templates')
 
 # Instantiate a blueprint of views and a controller
