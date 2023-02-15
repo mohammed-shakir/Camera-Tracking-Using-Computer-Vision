@@ -1,5 +1,8 @@
 import cv2
 import imutils
+from controller import Controller
+
+cont = Controller()
 
 # Initializing the HOG person
 # detector
@@ -31,11 +34,20 @@ while cap.isOpened():
                           (0, 0, 255), 2)
 
             # Print coordinates of detected person
-            print("x: " + str(x) + " y: " + str(y) + " width: " + str(w) + " height: " + str(h))
+            #print("x: " + str(x) + " y: " + str(y) + " width: " + str(w) + " height: " + str(h))
             # find center of person
             center_x = x + w / 2
             center_y = y + h / 2
             print("center_x: " + str(center_x) + " center_y: " + str(center_y))
+
+            if(x < 100):
+                print("left")
+                cont.left()
+            elif((x+w) > 300):
+                print("right")
+                cont.right()
+            else:
+                print("center")
 
         # Showing the output Image
         cv2.imshow("Image", image)
