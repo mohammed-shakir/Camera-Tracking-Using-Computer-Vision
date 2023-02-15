@@ -36,7 +36,7 @@ class Controller(Observer):
         # self.trackers = []
         # self.trackersDict = {}
 
-        self.rot_amount = 1
+        self.rot_amount = 2
 
         # self.followTarget = ""
         # self.is_follow = False

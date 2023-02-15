@@ -31,28 +31,40 @@ while cap.isOpened():
 
         # Drawing the regions in the
         # Image
-        for (x, y, w, h) in regions:
-            if(len(regions) > 1):
-                break
-            cv2.rectangle(image, (x, y),
-                            (x + w, y + h),
-                            (0, 0, 255), 2)            
+        for i, (x, y, w, h) in enumerate(regions):
+            #if(len(regions) > 1):
+                #break
+            if (_[i] > 0.5):
+                cv2.rectangle(image, (x, y),
+                                (x + w, y + h),
+                                (0, 0, 255), 2)  
 
-            # Print coordinates of detected person
-            #print("x: " + str(x) + " y: " + str(y) + " width: " + str(w) + " height: " + str(h))
-            # find center of person
-            center_x = x + w / 2
-            center_y = y + h / 2
-            print("center_x: " + str(center_x) + " center_y: " + str(center_y))
+                print(_[i])
 
-            if(x < 100):
-                print("left")
-                cont.left()
-            elif((x+w) > 300):
-                print("right")
-                cont.right()
-            else:
-                print("center")
+                # Print coordinates of detected person
+                #print("x: " + str(x) + " y: " + str(y) + " width: " + str(w) + " height: " + str(h))
+                # find center of person
+                center_x = x + w / 2
+                center_y = y + h / 2
+                print("center_x: " + str(center_x) + " center_y: " + str(center_y))
+
+                if(x < 100):
+                    print("left")
+                    cont.left()
+                elif((x+w) > 300):
+                    print("right")
+                    cont.right()
+                else:
+                    print("center")
+
+                if(y < 20):
+                    print("up")
+                    cont.up()
+                
+                elif(y > 180):
+                    print("down")
+                    cont.down()
+            
 
         # Showing the output Image
         cv2.imshow("Image", image)
