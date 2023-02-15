@@ -19,9 +19,9 @@ while cap.isOpened():
         # in the Image that has a
         # pedestrians inside it
         (regions, _) = hog.detectMultiScale(image,
-                                            winStride=(2, 2),
-                                            padding=(4, 4),
-                                            scale=0.9)
+                                            winStride=(4, 4),
+                                            padding=(8, 8),
+                                            scale=1.01)
 
         # Drawing the regions in the
         # Image
