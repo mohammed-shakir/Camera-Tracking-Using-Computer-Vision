@@ -9,3 +9,4 @@ wheel==0.38.4
 setuptools==67.1.0
 flask~=2.2.2
 numpy~=1.24.1
+imutils~=0.5.4

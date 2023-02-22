@@ -91,3 +91,29 @@ class HDIntegratedCamera:
 
         if req.status_code != self.Status.OK:
             raise Exception("Communication with camera failed")
+
+    def move_left(self, degrees: int):
+        """Move camera left by specified number of degrees"""
+        new_yaw = (self.__current_yaw - degrees) % 360
+        self.rotate(new_yaw, self.__current_pitch)
+        print("Moving left")
+
+    def move_right(self, degrees: int):
+        """Move camera right by specified number of degrees"""
+        new_yaw = (self.__current_yaw + degrees) % 360
+        self.rotate(new_yaw, self.__current_pitch)
+        print("Moving right")
+
+    def move_up(self, degrees: int):
+        """Move camera up by specified number of degrees"""
+        new_pitch = self.__current_pitch + degrees
+        self.set_current_pitch(new_pitch)
+        self.rotate(self.__current_yaw, new_pitch)
+        print("Moving up")
+
+    def move_down(self, degrees: int):
+        """Move camera down by specified number of degrees"""
+        new_pitch = self.__current_pitch - degrees
+        self.set_current_pitch(new_pitch)
+        self.rotate(self.__current_yaw, new_pitch)
+        print("Moving down")

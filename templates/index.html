@@ -9,53 +9,49 @@
 
   <!-- TODO: Change title -->
   <title>D0020E - Group 13</title>
-  <script async src='/cdn-cgi/bm/cv/669835187/api.js'></script>
+<!--  <script async src='/cdn-cgi/bm/cv/669835187/api.js'></script>-->
 </head>
 
 <body>
   <script type=text/javascript>
   //A ajax post request done to send rotation cordinates as json data.
-      $(function() {
-        $('a#rotate').on('click', function(e) {
-          e.preventDefault()
-          var i = document.getElementById("yaw").value;
-          var j = document.getElementById("pitch").value;
-          req = $.ajax({
-            url:'/rotate',
-            type: 'POST',
-            contentType: 'application/json',
-            dataType: 'json',
-            data: JSON.stringify({i:i, j:j})
-          });
-          req.done(function(){
+        $(function() {
+          $('a#rotate').on('click', function(e) {
+            e.preventDefault();
+            var i = $('#yaw').val();
+            var j = $('#pitch').val();
+            $.ajax({
+              url: '/rotate',
+              type: 'POST',
+              contentType: 'application/json',
+              dataType: 'json',
+              data: JSON.stringify({i: i, j: j})
+            }).done(function() {
+              // Code to execute after the request is done
+            });
           });
         });
-      });
     </script>
   <div class="video-container">
 
-    <!-- THIS ONLY WORKS IN FIREFOX -->
 <img src="{{ src }}" alt="{{ src }}" id="feed">
 
-<script>
-  var img = document.getElementById("feed");
-  var x = window.innerWidth;
-  var y = window.innerHeight;
-
-  img.style.width = x + "px";
-  img.style.height = y + "px";
-
-  var mql = window.matchMedia("(orientation: portrait)");
-
-  mql.addListener(function(e) {
-    if (e.matches) {
+  <script>
+    var img = document.getElementById("feed");
+    var x = window.innerWidth;
+    var y = window.innerHeight;
+  
+    img.style.width = x + "px";
+    img.style.height = y + "px";
+  
+    window.addEventListener('resize', function() {
       x = window.innerWidth;
       y = window.innerHeight;
       img.style.width = x + "px";
       img.style.height = y + "px";
-    }
-  });
-</script>
+    });
+  </script>
+
     <!-- HUD -->
 
     <div class="footer">
@@ -64,16 +60,14 @@
         <button class="button bottomRow">Rotate camera</button>
         <div class="dropdown-content">
           <form>
-            <a>Yaw: <input type="number" style="background-color: rgb(155, 170, 169);" class="bottomRow" name="yaw"
+            <a>X-axis: <input type="number" style="background-color: rgb(155, 170, 169);" class="bottomRow" name="X-axis"
                 id="yaw" min="0" max="360"></a>
-            <a>Pitch: <input type="number" style="background-color: rgb(155, 170, 169);" class="bottomRow" name="pitch"
+            <a>Y-axis: <input type="number" style="background-color: rgb(155, 170, 169);" class="bottomRow" name="Y-axis"
                 id="pitch" min="90" max="180"></a>
             <a href=# id=rotate><button class='button bottomRow'>Rotate</button></a>
           </form>
         </div>
       </div>
-
-
 
       <div class="dropdown">
         <button class="button bottomRow">Change camera</button>
@@ -129,14 +123,10 @@
 
 </body>
 
-<script
-  type="text/javascript">(function () { window['__CF$cv$params'] = { r: '6def2fec4d251691', m: 'gqZwj672um515pQmRHaYs4XfkVW1J5jOY8J0rs1ODU4-1645102706-0-ARBsSprk1uRQp/ejKkoKtEFUu9q9Yw6ieetRS1dmVn11lYjqNCsGalNH6zU86/3xKF/xYtfvZIf7AcJCFmC/sWBhgCzhVhCaeABea8iOs9k5oCtT6SNoI/9XN/cTdSPHnXXE2S75msnSdYlA0fl0NKwCojFidUsBYnPtkrJJ13qQxADhP7y0TxfjKKXuiBfheg==', s: [0x56dd5cc53f, 0xdcaf6c87fa], } })();</script>
-
 <script>
-
-  //Scripts to handle all interaction with interface
-
-
+  // default camera
+  img.src = "http://130.240.105.144/cgi-bin/mjpeg?resolution=1920x1080&amp;framerate=30&amp;quality=1"
+  
   // Make console visible
   function on(){
     document.getElementById("overlay").style.display = "block";
@@ -154,12 +144,12 @@
     fetch(s)
     var img = document.getElementById("feed")
     if(cam == "Bedroom"){
-      img.src = "http://130.240.105.145/cgi-bin/mjpeg?resolution=1920x1080&amp;framerate=5&amp;quality=1"
-      img.alt = "http://130.240.105.145/cgi-bin/mjpeg?resolution=1920x1080&amp;framerate=5&amp;quality=1"
+      img.src = "http://130.240.105.145/cgi-bin/mjpeg?resolution=1920x1080&amp;framerate=30&amp;quality=1"
+      img.alt = "http://130.240.105.145/cgi-bin/mjpeg?resolution=1920x1080&amp;framerate=30&amp;quality=1"
     }
     else{
-      img.src = "http://130.240.105.144/cgi-bin/mjpeg?resolution=1920x1080&amp;framerate=5&amp;quality=1"
-      img.alt = "http://130.240.105.144/cgi-bin/mjpeg?resolution=1920x1080&amp;framerate=5&amp;quality=1"
+      img.src = "http://130.240.105.144/cgi-bin/mjpeg?resolution=1920x1080&amp;framerate=30&amp;quality=1"
+      img.alt = "http://130.240.105.144/cgi-bin/mjpeg?resolution=1920x1080&amp;framerate=30&amp;quality=1"
     }
   }
 

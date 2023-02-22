@@ -1,10 +1,10 @@
-from camera import HDIntegratedCamera
-from observer_pattern.observer import Observer, Subject
-import numpy
+import os
+from pathlib import Path
+
 import pymysql
 from dotenv import load_dotenv
-from pathlib import Path
-import os
+from camera import HDIntegratedCamera
+from observer_pattern.observer import Observer, Subject
 
 
 class Controller(Observer):
@@ -14,32 +14,46 @@ class Controller(Observer):
     def __init__(self):
         # Instantiates all relevant tools the controller needs to operate
 
+        self.bedroomCameraURL = "http://130.240.105.145/cgi-bin/" \
+                                "mjpeg?resolution=1920x1080&amp;framerate=30&amp;quality=1"
+        self.kitchenCameraURL = "http://130.240.105.144/cgi-bin/" \
+                                "mjpeg?resolution=1920x1080&amp;framerate=30&amp;quality=1"
+
+        self.log_rows = None
+        self.cursor = None
+        self.connection = None
+        self.rot_amount = 2
         self.getAllLogs()
 
-        # Change frame rate for better performance
-        self.src = "http://130.240.105.144/cgi-bin/mjpeg?resolution=1920x1080&amp;framerate=5&amp;quality=1"
+        self.src = "http://130.240.105.145/cgi-bin/mjpeg?resolution=1920x1080&amp;framerate=30&amp;quality=1"
+        # which camera to control
+        self.cam = HDIntegratedCamera("http://130.240.105.145/cgi-bin/aw_ptz?cmd=%23")
 
-        self.cam = HDIntegratedCamera("http://130.240.105.144/cgi-bin/aw_ptz?cmd=%23")
+    def followPerson(self, x, y, w, camera):
+        # Define the horizontal and vertical margins
+        self.switchCam(camera)
+        x_margin_left = 80
+        x_margin_right = 200
+        y_margin_up = 30
+        y_margin_down = 180
 
-        self.camera_bedroom_pos = numpy.array([619, 3935, 2600])
-        self.camera_bedroom_zero = numpy.array([-765, 4112, 2878])
-        self.camera_bedroom_floor = numpy.array([531, 3377, 331])
+        # Check if the person is too far to the left
+        if x < x_margin_left:
+            self.cam.move_left(10)
+        # Check if the person is too far to the right
+        elif (x + w) > x_margin_right:
+            self.cam.move_right(10)
+        # else:
+        #     print("Centered horizontally")
 
-        self.camera_kitchen_pos = numpy.array([2873, -2602, 2186])
-        self.camera_kitchen_zero = numpy.array([3413, -2722, 2284])
-        self.camera_kitchen_floor = numpy.array([2694, -2722, 193])
-
-        # self.cam_trans = wf.Transform(self.camera_kitchen_pos, self.camera_kitchen_zero, self.camera_kitchen_floor)
-
-        self.rotate(210, 140)
-
-        # self.trackers = []
-        # self.trackersDict = {}
-
-        self.rot_amount = 2
-
-        # self.followTarget = ""
-        # self.is_follow = False
+        # Check if the person is too high up
+        if y < y_margin_up:
+            self.cam.move_up(10)
+        # Check if the person is too low
+        elif y > y_margin_down:
+            self.cam.move_down(10)
+        # else:
+        #     print("Centered vertically")
 
     def rotate(self, i, j):
         # A function handling a rotate command
@@ -50,26 +64,27 @@ class Controller(Observer):
         # and changing its transform to have the right room values
         if cam == "Kitchen":
             self.cam = HDIntegratedCamera("http://130.240.105.144/cgi-bin/aw_ptz?cmd=%23")
+            self.rotate(180, 140)
 
         if cam == "Bedroom":
             self.cam = HDIntegratedCamera("http://130.240.105.145/cgi-bin/aw_ptz?cmd=%23")
+            self.rotate(250, 160)
 
     # Handling of manual input with arrow keys
     def up(self):
-        # self.is_follow = False
-        self.cam.rotate(self.cam.get_current_yaw(), self.cam.get_current_pitch() + self.rot_amount)
+        self.cam.move_up(2)
 
     def down(self):
-        # self.is_follow = False
-        self.cam.rotate(self.cam.get_current_yaw(), self.cam.get_current_pitch() - self.rot_amount)
+        self.cam.move_down(2)
 
     def left(self):
-        # self.is_follow = False
-        self.cam.rotate(self.cam.get_current_yaw() - self.rot_amount, self.cam.get_current_pitch())
+        # debugging why the camera is moving randomly after selecting a new camera
+        print(self.cam.get_current_yaw())
+        print(self.cam.get_current_pitch())
+        self.cam.move_left(2)
 
     def right(self):
-        # self.is_follow = False
-        self.cam.rotate(self.cam.get_current_yaw() + self.rot_amount, self.cam.get_current_pitch())
+        self.cam.move_right(2)
 
     # Handling of zoom in and zoom out on interface
     def zoomIn(self):
