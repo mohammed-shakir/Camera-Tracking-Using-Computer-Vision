@@ -7,7 +7,6 @@ hog = cv2.HOGDescriptor()
 hog.setSVMDetector(cv2.HOGDescriptor_getDefaultPeopleDetector())
 
 kitchenCamera = cv2.VideoCapture(controller.kitchenCameraURL)
-print(kitchenCamera.isOpened())
 bedroomCamera = cv2.VideoCapture(controller.bedroomCameraURL)
 
 
