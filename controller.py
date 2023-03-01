@@ -32,9 +32,9 @@ class Controller(Observer):
         self.rot_amount = 2
         self.getAllLogs()
 
-        self.src = "http://130.240.105.145/cgi-bin/mjpeg?resolution=1920x1080&amp;framerate=30&amp;quality=1"
+        self.src = "http://130.240.105.144/cgi-bin/mjpeg?resolution=1920x1080&amp;framerate=30&amp;quality=1"
         # which camera to control
-        self.cam = HDIntegratedCamera("http://130.240.105.145/cgi-bin/aw_ptz?cmd=%23")
+        self.cam = HDIntegratedCamera("http://130.240.105.144/cgi-bin/aw_ptz?cmd=%23")
 
     def follow_person(self, x, y, w, camera):
         self.switch_cam(camera)
