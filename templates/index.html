@@ -34,24 +34,26 @@
     </script>
   <div class="video-container">
 
-<img src="{{ src }}" alt="{{ src }}" id="feed">
 
-  <script>
-    var img = document.getElementById("feed");
-    var x = window.innerWidth;
-    var y = window.innerHeight;
-  
-    img.style.width = x + "px";
-    img.style.height = y + "px";
-  
-    window.addEventListener('resize', function() {
-      x = window.innerWidth;
-      y = window.innerHeight;
-      img.style.width = x + "px";
-      img.style.height = y + "px";
-    });
-  </script>
+ <!-- THIS ONLY WORKS IN FIREFOX -->
+    <!-- A img tag with the video source that is adapted to screen size with a script-->
+    <img src="{{ src }}"
+      alt="{{ src }}" width="1920"
+      height="1080" id="feed">
 
+      <script>
+        var img = document.getElementById("feed")
+        var win = window,
+        doc = document,
+        docElem = doc.documentElement,
+        body = doc.getElementsByTagName('body')[0],
+        x = win.innerWidth || docElem.clientWidth || body.clientWidth,
+        y = win.innerHeight|| docElem.clientHeight|| body.clientHeight;
+
+        img.height = y
+        img.width = x
+
+      </script>
     <!-- HUD -->
 
     <div class="footer">

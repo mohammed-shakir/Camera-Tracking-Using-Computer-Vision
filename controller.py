@@ -1,10 +1,16 @@
 import os
 from pathlib import Path
-
+import time
 import pymysql
 from dotenv import load_dotenv
 from camera import HDIntegratedCamera
 from observer_pattern.observer import Observer, Subject
+
+BUFFER_SIZE = 10
+X_MARGIN = (80, 200)
+Y_MARGIN = (30, 180)
+SCALING_FACTOR = 0.1
+SLEEP_TIME = 1
 
 
 class Controller(Observer):
@@ -22,6 +28,7 @@ class Controller(Observer):
         self.log_rows = None
         self.cursor = None
         self.connection = None
+        self.position_buffer = []
         self.rot_amount = 2
         self.getAllLogs()
 
@@ -29,37 +36,46 @@ class Controller(Observer):
         # which camera to control
         self.cam = HDIntegratedCamera("http://130.240.105.145/cgi-bin/aw_ptz?cmd=%23")
 
-    def followPerson(self, x, y, w, camera):
-        # Define the horizontal and vertical margins
-        self.switchCam(camera)
-        x_margin_left = 80
-        x_margin_right = 200
-        y_margin_up = 30
-        y_margin_down = 180
+    def follow_person(self, x, y, w, camera):
+        self.switch_cam(camera)
 
-        # Check if the person is too far to the left
-        if x < x_margin_left:
-            self.cam.move_left(10)
-        # Check if the person is too far to the right
-        elif (x + w) > x_margin_right:
-            self.cam.move_right(10)
-        # else:
-        #     print("Centered horizontally")
+        # Add the current position to the buffer and remove the oldest position if the buffer is full
+        self.position_buffer.append((x, y))
+        if len(self.position_buffer) > BUFFER_SIZE:
+            self.position_buffer.pop(0)
 
-        # Check if the person is too high up
-        if y < y_margin_up:
-            self.cam.move_up(10)
-        # Check if the person is too low
-        elif y > y_margin_down:
-            self.cam.move_down(10)
-        # else:
-        #     print("Centered vertically")
+        # Calculate the average position of the person detected over the last few frames
+        x_avg, y_avg = tuple(map(lambda x: sum(x) / len(x), zip(*self.position_buffer)))
+
+        # Calculate the distance between the current position and the target position
+        dist_x = abs(x_avg - X_MARGIN[0]) if x_avg < X_MARGIN[0] else abs(x_avg + w - X_MARGIN[1])
+        dist_y = abs(y_avg - Y_MARGIN[0]) if y_avg < Y_MARGIN[0] else abs(y_avg + w - Y_MARGIN[1])
+
+        # Move the camera based on the distance between the current position and the target position
+        if dist_x > 0 or dist_y > 0:
+            # Define a scaling factor for the amount by which the camera should move
+            move_x = int(dist_x * SCALING_FACTOR)
+            move_y = int(dist_y * SCALING_FACTOR)
+
+            # Determine which direction to move the camera
+            if x_avg < X_MARGIN[0]:
+                self.cam.move_left(move_x)
+            elif x_avg + w > X_MARGIN[1]:
+                self.cam.move_right(move_x)
+
+            if y_avg < Y_MARGIN[0]:
+                self.cam.move_up(move_y)
+            elif y_avg + w > Y_MARGIN[1]:
+                self.cam.move_down(move_y)
+
+            # Add a sleep time to make the movement smoother
+            time.sleep(SLEEP_TIME)
 
     def rotate(self, i, j):
         # A function handling a rotate command
         self.cam.rotate(i, j)
 
-    def switchCam(self, cam):
+    def switch_cam(self, cam):
         # A function that switches camera by changing url to camera
         # and changing its transform to have the right room values
         if cam == "Kitchen":
