@@ -6,7 +6,9 @@ import sys
 sys.path.insert(0, 'C:/Users/moham/Documents/code/Camera-Tracking-Using-UWB-Navigation')
 from controller import Controller
 
-cont = Controller()
+controller = Controller()
+
+controller.rotate(180, 140)
 
 ap = argparse.ArgumentParser()
 ap.add_argument('-c', '--config', required=True,
@@ -58,7 +60,7 @@ net = cv2.dnn.readNet(args.weights, args.config)
 conf_threshold = 0.5
 nms_threshold = 0.4
 
-cap = cv2.VideoCapture("http://130.240.105.144/cgi-bin/mjpeg?resolution=1920x1080&amp;framerate=120&amp;quality=1")
+cap = cv2.VideoCapture(controller.kitchenCameraURL)
 
 while True:
     ret, frame = cap.read()
@@ -82,6 +84,8 @@ while True:
     confidences = []
     boxes = []
 
+    person_found = False
+
     for out in outs:
         for detection in out:
             scores = detection[5:]
@@ -97,7 +101,27 @@ while True:
                 class_ids.append(class_id)
                 confidences.append(float(confidence))
                 boxes.append([x, y, w, h])
-                print("x: ", x, "y: ", y, "w: ", w, "h: ", h)
+                # print("x: ", x, "y: ", y, "w: ", w, "h: ", h)
+
+                if (x < 10):
+                    print("left")
+                    controller.left()
+                elif ((x+w) > 790):
+                    print("right")
+                    controller.right()
+                if (y < 10):
+                    print("up")
+                    controller.up()
+                elif ((y+h) > 380):
+                    print("down")
+                    controller.down()
+                
+
+                person_found = True
+                break
+
+        if person_found:
+            break
 
     indices = cv2.dnn.NMSBoxes(boxes, confidences, conf_threshold, nms_threshold)
 
