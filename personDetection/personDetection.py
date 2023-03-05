@@ -4,7 +4,7 @@ import numpy as np
 import imutils
 import sys
 import threading
-sys.path.insert(0, 'C:/Users/moham/Documents/code/Camera-Tracking-Using-UWB-Navigation')
+sys.path.insert(0, 'C:/Users/moham/Documents/code/Camera-Tracking-Using-Computer-Vision')
 from controller import Controller
 
 # python personDetection.py --config yolov3.cfg --weights yolov3.weights --classes yolov3.txt

@@ -21,9 +21,9 @@ class Controller(Observer):
         # Instantiates all relevant tools the controller needs to operate
 
         self.bedroomCameraURL = "http://130.240.105.145/cgi-bin/" \
-                                "mjpeg?resolution=1920x1080&amp;framerate=200&amp;quality=1"
+                                "mjpeg?resolution=1920x1080&amp;framerate=60&amp;quality=1"
         self.kitchenCameraURL = "http://130.240.105.144/cgi-bin/" \
-                                "mjpeg?resolution=1920x1080&amp;framerate=200&amp;quality=1"
+                                "mjpeg?resolution=1920x1080&amp;framerate=60&amp;quality=1"
 
         self.log_rows = None
         self.cursor = None
@@ -32,7 +32,7 @@ class Controller(Observer):
         self.rot_amount = 2
         self.getAllLogs()
 
-        self.src = "http://130.240.105.144/cgi-bin/mjpeg?resolution=1920x1080&amp;framerate=200&amp;quality=1"
+        self.src = "http://130.240.105.144/cgi-bin/mjpeg?resolution=1920x1080&amp;framerate=60&amp;quality=1"
         # which camera to control
         self.cam = HDIntegratedCamera("http://130.240.105.144/cgi-bin/aw_ptz?cmd=%23")
 
