@@ -21,9 +21,9 @@ class Controller(Observer):
         # Instantiates all relevant tools the controller needs to operate
 
         self.bedroomCameraURL = "http://130.240.105.145/cgi-bin/" \
-                                "mjpeg?resolution=1920x1080&amp;framerate=30&amp;quality=1"
+                                "mjpeg?resolution=1920x1080&amp;framerate=200&amp;quality=1"
         self.kitchenCameraURL = "http://130.240.105.144/cgi-bin/" \
-                                "mjpeg?resolution=1920x1080&amp;framerate=30&amp;quality=1"
+                                "mjpeg?resolution=1920x1080&amp;framerate=200&amp;quality=1"
 
         self.log_rows = None
         self.cursor = None
@@ -32,7 +32,7 @@ class Controller(Observer):
         self.rot_amount = 2
         self.getAllLogs()
 
-        self.src = "http://130.240.105.144/cgi-bin/mjpeg?resolution=1920x1080&amp;framerate=30&amp;quality=1"
+        self.src = "http://130.240.105.144/cgi-bin/mjpeg?resolution=1920x1080&amp;framerate=200&amp;quality=1"
         # which camera to control
         self.cam = HDIntegratedCamera("http://130.240.105.144/cgi-bin/aw_ptz?cmd=%23")
 
@@ -88,19 +88,19 @@ class Controller(Observer):
 
     # Handling of manual input with arrow keys
     def up(self):
-        self.cam.move_up(2)
+        self.cam.move_up(1)
 
     def down(self):
-        self.cam.move_down(2)
+        self.cam.move_down(1)
 
     def left(self):
         # debugging why the camera is moving randomly after selecting a new camera
-        print(self.cam.get_current_yaw())
-        print(self.cam.get_current_pitch())
-        self.cam.move_left(2)
+        # print(self.cam.get_current_yaw())
+        # print(self.cam.get_current_pitch())
+        self.cam.move_left(10)
 
     def right(self):
-        self.cam.move_right(2)
+        self.cam.move_right(10)
 
     # Handling of zoom in and zoom out on interface
     def zoomIn(self):
