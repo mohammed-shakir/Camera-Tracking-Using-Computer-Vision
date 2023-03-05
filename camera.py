@@ -29,8 +29,8 @@ class HDIntegratedCamera:
         self.__BASEURL = baseurl
 
         # Orientation variables
-        self.__current_yaw = 0
-        self.__current_pitch = 0
+        self.__current_yaw = 180
+        self.__current_pitch = 140
 
     def get_current_yaw(self):
         return self.__current_yaw
