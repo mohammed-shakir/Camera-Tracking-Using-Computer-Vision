@@ -40,10 +40,10 @@ def draw_prediction(img, class_id, x, y, x_plus_w, y_plus_h):
 
 net = cv2.dnn.readNet(args.weights, args.config)
 
-conf_threshold = 0.4
+conf_threshold = 0.3
 nms_threshold = 0.4
 
-cap = cv2.VideoCapture(controller.kitchenCameraURL) # controller.kitchenCameraURL
+cap = cv2.VideoCapture(controller.bedroomCameraURL) # controller.kitchenCameraURL
 
 while True:
     ret, frame = cap.read()
@@ -85,13 +85,13 @@ while True:
             if (x < 50):
                 print('Left')
                 controller.left()
-            elif ((x+w) > 750):
+            elif ((x+w) > 350):
                 print('Right')
                 controller.right()
             elif (y < 5):
                 print('Up')
                 controller.up()
-            elif ((y+h) > 395):
+            elif ((y+h) > 195):
                 print('Down')
                 controller.down()
             else:
